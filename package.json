@@ -1,0 +1,35 @@
+{
+  "name": "streamingapp",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.7.0",
+    "@hapi/boom": "^10.0.1",
+    "@hapi/cookie": "^12.0.1",
+    "@hapi/hapi": "^21.3.2",
+    "bull": "^4.10.4",
+    "dotenv": "^16.0.3",
+    "joi": "^17.9.2",
+    "pg": "^8.10.0",
+    "pg-hstore": "^2.3.4",
+    "redis": "^4.6.6",
+    "sequelize": "^6.31.1"
+  },
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumanth13131/MovieAppAPIs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sumanth13131/MovieAppAPIs/issues"
+  },
+  "homepage": "https://github.com/sumanth13131/MovieAppAPIs#readme",
+  "description": ""
+}
