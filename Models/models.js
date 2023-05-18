@@ -44,9 +44,8 @@ export class Movies_Genres extends Model {}
 Users.init(
     {
         User_Id: {
-            type: DataTypes.SMALLINT,
+            type: DataTypes.BIGINT,
             primaryKey: true,
-            autoIncrement: true,
         },
         User_Name: { type: DataTypes.TEXT, allowNull: false, unique: true },
         User_Email: { type: DataTypes.TEXT, allowNull: false },
@@ -59,6 +58,10 @@ Users.init(
         timestamps: true,
     }
 );
+
+Users.addHook("beforeCreate", "customUserId", (record, options) => {
+    record.User_Id = Date.now();
+});
 
 Movies.init(
     {
