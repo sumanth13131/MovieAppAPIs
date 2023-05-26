@@ -1,9 +1,10 @@
 import Bull from "bull";
-import { User_Rating } from "../Models/models.js";
 import redis from "./Util/redisutil.js";
 import dotenv from "dotenv";
 import { getMovieRating } from "./Util/dbutil.js";
 import { updateValueInIndex } from "../Search/util.js";
+import { User_Rating } from "../Models/User_Rating.js";
+import logger from "../Logging/util.js";
 dotenv.config("../.env");
 
 const IS_CACHE_ENABLED = process.env.IS_CACHE_ENABLED == "true" ? true : false;
@@ -34,7 +35,10 @@ rating_queue.on("completed", async (job) => {
     if (IS_CACHE_ENABLED) {
         await redis.del(`m_${job.data.Movie_Id}`);
     }
-    console.log(
+    logger.info(
         `User: ${job.data.User_Id} Rated: ${job.data.Rating} MovieId: ${job.data.Movie_Id} `
     );
+    // console.log(
+    //     `User: ${job.data.User_Id} Rated: ${job.data.Rating} MovieId: ${job.data.Movie_Id} `
+    // );
 });

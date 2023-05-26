@@ -1,10 +1,8 @@
-import { Actors, Genres, Movies } from "../Models/models.js";
-import {
-    bulkIndex,
-    delIndex,
-    getMachedData,
-    getMovieByID,
-} from "../Search/util.js";
+import logger from "../Logging/util.js";
+import { Actors } from "../Models/Actors.js";
+import { Genres } from "../Models/Genres.js";
+import { Movies } from "../Models/Movies.js";
+import { bulkIndex, delIndex, getMachedData } from "../Search/util.js";
 import {
     getMovieDetailsById,
     getMovieIDSWithMatch,
@@ -214,14 +212,19 @@ export async function reIndexMovieDetails() {
         }
         let isIndexed = await bulkIndex(process.env.ELASTIC_SEARCH_INDEX, doc);
         if (isIndexed) {
-            console.log(
+            logger.info(
                 "ReIndex :: indexed count: " + (offset + movies.length)
             );
+            // console.log(
+            //     "ReIndex :: indexed count: " + (offset + movies.length)
+            // );
             offset += limit;
         } else {
-            console.log("Index Retry");
+            logger.info("Index Retry");
+            // console.log("Index Retry");
         }
     }
-    console.log("ReIndexing Completed");
+    logger.info("ReIndexing Completed");
+    // console.log("ReIndexing Completed");
     return true;
 }

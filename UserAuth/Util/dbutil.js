@@ -1,6 +1,6 @@
-import { Users } from "../../Models/models.js";
 import { Op } from "sequelize";
 import dotenv from "dotenv";
+import { Users } from "../../Models/Users.js";
 dotenv.config("../../.env");
 export async function isUserExist(username) {
     let user = await Users.findOne({

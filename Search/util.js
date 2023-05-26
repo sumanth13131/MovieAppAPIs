@@ -1,3 +1,4 @@
+import logger from "../Logging/util.js";
 import search from "./search_client.js";
 
 let fieldToSearch = {
@@ -32,7 +33,8 @@ export async function delIndex(index) {
     try {
         await search.indices.delete({ index: index });
     } catch (err) {
-        console.log("Index not exist :: " + err);
+        logger.info("Index not exist :: " + err);
+        // console.log("Index not exist :: " + err);
     } finally {
         await search.indices.create({ index: index });
     }

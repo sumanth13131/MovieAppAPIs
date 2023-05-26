@@ -1,13 +1,17 @@
-import Hapi from "@hapi/hapi";
 import dotenv from "dotenv";
+dotenv.config();
+import RelationInit from "./Models/Relations.js";
+import Hapi from "@hapi/hapi";
 import Signup from "./UserAuth/plugins/signup.js";
 import Signin from "./UserAuth/plugins/signin.js";
 import Signout from "./UserAuth/plugins/signout.js";
 import App from "./Movies/plugins/app_apis.js";
 import Cookie from "@hapi/cookie";
 import { strategy } from "./UserAuth/Util/cookie.js";
+import logger from "./Logging/util.js";
 
 async function init() {
+    RelationInit();
     const server = Hapi.server({
         port: process.env.PORT,
         routes: {
@@ -34,11 +38,11 @@ async function init() {
 
     try {
         await server.start();
-        console.log("Server Running at", server.info.uri);
+        logger.info(`Server Running at ${server.info.uri}`);
+        // console.log("Server Running at", server.info.uri);
     } catch (error) {
-        console.log(error);
+        logger.error(error);
+        // console.log(error);
     }
 }
-
-dotenv.config();
 init();
